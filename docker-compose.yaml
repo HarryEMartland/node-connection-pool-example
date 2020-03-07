@@ -1,0 +1,44 @@
+version: '3'
+services:
+  delay-service:
+    image: node:13-alpine
+    command: npm start
+    working_dir: /home/node/app
+    volumes: 
+      - ./delay-service:/home/node/app
+    ports: 
+        - "3001:3000"
+  view-service:
+    image: node:13-alpine
+    command: npm start
+    working_dir: /home/node/app
+    volumes: 
+      - ./view-service:/home/node/app
+    ports: 
+        - "3000:3000"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.10'
+          memory: 200M
+        reservations:
+          cpus: '0.10'
+          memory: 200M
+  prometheus:
+    image: prom/prometheus
+    volumes: 
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports: 
+      - "9090:9090"
+  grafana:
+    image: grafana/grafana
+    ports: 
+      - "3002:3000"
+    environment: 
+      GF_SERVER_ROOT_URL: "http://localhost:3001"
+      GF_AUTH_DISABLE_LOGIN_FORM: "false"
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_SECURITY_ADMIN_PASSWORD: "secret"
+    volumes: 
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+      - ./grafana/dashboards:/var/lib/grafana/dashboards

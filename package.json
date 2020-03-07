@@ -1,0 +1,14 @@
+{
+  "name": "node-connection-pool-example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "install": "yarn install --cwd ./delay-service && yarn install --cwd ./view-service",
+    "start": "docker-compose up",
+    "artillery:run": "artillery run artillery.yaml"
+  },
+  "dependencies": {
+    "artillery": "^1.6.0-29"
+  }
+}

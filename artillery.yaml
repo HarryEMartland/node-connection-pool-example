@@ -1,0 +1,13 @@
+config:
+  target: 'http://localhost:3000'
+  http:
+    pool: 200
+  phases:
+    - duration: 180
+      arrivalRate: 50
+      rampTo: 100
+scenarios:
+  - flow:
+    - get:
+        url: "/?keepalive=true"
+
