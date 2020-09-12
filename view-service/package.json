@@ -14,7 +14,7 @@
     "express-prom-bundle": "^5.1.5",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "prom-client": "^11.5.3"
   }
 }
